@@ -1,4 +1,5 @@
 import numpy as np
+# %matplotlib inline
 from matplotlib import pyplot as plt
 import mplcursors
 

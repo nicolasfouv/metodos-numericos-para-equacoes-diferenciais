@@ -1,5 +1,4 @@
 import numpy as np
-# %matplotlib inline
 from matplotlib import pyplot as plt
 import mplcursors
 
@@ -10,6 +9,7 @@ def FTCS(Qnj, Qnjforward, Qnjbackward, dt, dx, u, a):
 def plot(Q, T, numTs, Lx, numXs):
     fig = plt.figure(figsize = (13, 5))
     fig.suptitle('Solução da equação de advecção-difusão', fontsize = 16)
+    fig.canvas.manager.set_window_title('')
 
     # Plot 3D
     ax = fig.add_subplot(1, 2, 1, projection = '3d')
@@ -36,6 +36,7 @@ def plot(Q, T, numTs, Lx, numXs):
     "add", lambda sel: sel.annotation.set_text(sel.artist.get_label()))
 
     plt.show()
+    plt.close(fig)
 
 def apply(function, T, numTs, Lx, numXs, u, a, ce, c0, ignore_stability = False):
     if (u == 0 and a == 0):
@@ -82,20 +83,20 @@ def apply(function, T, numTs, Lx, numXs, u, a, ce, c0, ignore_stability = False)
 def main():
     # Malha
     Lx = 1.0
-    nx = 10
-    T = 1.0
-    nt = 1000
+    nx = 100
+    T = 2.0
+    nt = 100
     ignore_stability = False
 
     # Constantes
-    u = 2.0
+    u = 0.5
     a = 0
 
     # Condição inicial
-    c0 = 1.1
+    c0 = 0.2
 
     # Condição de contorno de entrada
-    ce = 1.2
+    ce = 1
 
     apply(FTCS, T, nt, Lx, nx, u, a, ce, c0, ignore_stability)
 
